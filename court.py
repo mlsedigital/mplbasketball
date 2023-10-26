@@ -17,7 +17,7 @@ class Court():
                  court_color="white",
                  line_color="black", line_alpha=1.0, line_width=3.,
                  paint_color="white",
-                 show_hoop=True, hoop_linewidth=2, hoop_color="lightgrey", hoop_alpha=0.5,
+                 show_hoop=True, hoop_linewidth=2, hoop_color="black", hoop_alpha=1,
                  pad=5.,
                  ):
 
