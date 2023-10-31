@@ -87,21 +87,24 @@ class Court():
         elif court_type == "wnba":
             self.court_parameters = court_params.wnba_court_parameters
 
-    def draw(self, ax=None, figsize=None, nrows=1, ncols=1):
+    def draw(self, ax=None, figsize=None, nrows=1, ncols=1, dpi=300):
         if ax is None:
             if figsize is None:
                 figsize = (12, 6.5)
-            fig, axs = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize, dpi=100)
+            fig, axs = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize, dpi=dpi)
             if (nrows == 1) and (ncols == 1):
                 axs = np.array([axs])
             for ax in axs.flatten():
                 self._draw_court(ax)
                 ax.set_aspect("equal")
+            for ax in axs.flatten():
+                self._draw_court(ax)
+                ax.set_aspect("equal")
             return axs
-        for ax in axs.flatten():
+        else:
             self._draw_court(ax)
             ax.set_aspect("equal")
-        return None
+
 
     def _draw_court(self, ax):
 
