@@ -4,7 +4,7 @@ Basketball plotting library for use with matplotlib. Currently a `Court()` objec
 ## Installation
 Install using 
 ```
-pip3 install --force-reinstall git+https://{TOKEN}@github.com/mlsedigital/mplbasketball.git 
+pip3 install git+https://{TOKEN}@github.com/mlsedigital/mplbasketball.git 
 ```
 
 ## Quick usage guide
