@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 sys.path.append("../")
-from court import Court
+from mplbasketball.court import Court
 
 player_names = ["Fred Van Vleet", 
                 "Scottie Barnes",
