@@ -5,6 +5,8 @@ nba_court_parameters = {
     "hoop_diameter": 0.75,
     "backboard_distance_from_edge": 4.,
     "backboard_width": 6.,
+    "charge_circle_radius": 4.,
+    "charge_circle_side_length": 3.,
     # Outer paint
     "outer_paint_dims": [18.+5/6, 16-1/3],
     # Inner paint
@@ -26,6 +28,8 @@ wnba_court_parameters = {
     "hoop_diameter": 0.75,
     "backboard_distance_from_edge": 4.,
     "backboard_width": 6.,
+    "charge_circle_radius": 4.,
+    "charge_circle_side_length": 3.,
     # Outer paint
     "outer_paint_dims": [18.+5/6, 16-1/3],
     # Inner paint
