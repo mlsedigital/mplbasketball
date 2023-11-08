@@ -83,7 +83,7 @@ class Court():
             fig, axs = plt.subplots(nrows=nrows, ncols=ncols, dpi=dpi)
             if nrows == 1 and ncols == 1:
                 if orientation == "horizontal":
-                    self._draw_horizontal_court(ax, half,
+                    self._draw_horizontal_court(axs, half,
                                                 court_color=court_color,
                                                 paint_color=paint_color,
                                                 line_color=line_color, line_alpha=line_alpha,
@@ -91,7 +91,7 @@ class Court():
                                                 hoop_alpha=hoop_alpha,
                                                 pad=pad)
                 elif orientation == "vertical":
-                    self._draw_vertical_court(ax, half,
+                    self._draw_vertical_court(axs, half,
                                               court_color=court_color,
                                               paint_color=paint_color,
                                               line_color=line_color, line_alpha=line_alpha,
@@ -99,8 +99,9 @@ class Court():
                                               hoop_alpha=hoop_alpha,
                                               pad=pad)
                 if showaxis is False:
-                    ax.axis("off")
-                ax.set_aspect("equal")
+                    axs.axis("off")
+                axs.set_aspect("equal")
+                return fig, axs
             else:
                 for ax in axs:
                     if orientation == "horizontal":
