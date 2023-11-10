@@ -24,9 +24,7 @@ def heatmap(ax,
             extent_y = [-court_x/2, court_x/2]
             extent_x = [-court_y/2, court_y/2]
             plot_extent = np.concatenate((extent_x, extent_y))
-        statistic, x_edge, y_edge, binnumber = binned_statistic_2d(-y_data, x_data, None,
-                                                                   'count', bins=[grid_x, grid_y],
-                                                                   range=[extent_x, extent_y])
+        statistic, _, _, _ = binned_statistic_2d(-y_data, x_data, None, 'count', bins=[grid_x, grid_y], range=[extent_x, extent_y])
 
     elif orientation == "horizontal":
         if half is True:
@@ -37,9 +35,7 @@ def heatmap(ax,
             extent_x = [-court_x/2, court_x/2]
             extent_y = [-court_y/2, court_y/2]
             plot_extent = np.concatenate((extent_x, extent_y))
-        statistic, x_edge, y_edge, binnumber = binned_statistic_2d(x_data, y_data, None,
-                                                                   'count', bins=[grid_x, grid_y],
-                                                                   range=[extent_x, extent_y])
+        statistic, _, _, _ = binned_statistic_2d(x_data, y_data, None, 'count', bins=[grid_x, grid_y], range=[extent_x, extent_y])
 
     # Apply Gaussian filter for smoothing
     if smooth:
