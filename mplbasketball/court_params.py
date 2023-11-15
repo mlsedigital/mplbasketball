@@ -7,6 +7,11 @@ nba_court_parameters = {
     "backboard_width": 6.,
     "charge_circle_radius": 4.,
     "charge_circle_side_length": 3.,
+    # Inbound lines
+    "inbound_line_distance_from_edge": 28.,
+    "inbound_line_length": 3.,
+    "outbound_line_distance_from_center": 4.+1/12.,
+    "outbound_line_length": 4.,
     # Outer paint
     "outer_paint_dims": [18.+5/6, 16-1/3],
     # Inner paint
@@ -30,6 +35,11 @@ wnba_court_parameters = {
     "backboard_width": 6.,
     "charge_circle_radius": 4.,
     "charge_circle_side_length": 3.,
+    # Inbound lines
+    "inbound_line_distance_from_edge": 28.,
+    "inbound_line_length": 3.,
+    "outbound_line_distance_from_center": 4.+1/12.,
+    "outbound_line_length": 4.,
     # Outer paint
     "outer_paint_dims": [18.+5/6, 16-1/3],
     # Inner paint
