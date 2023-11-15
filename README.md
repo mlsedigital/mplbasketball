@@ -184,13 +184,14 @@ ax[1].scatter(x=x_def_d, y=y_def_d, s=2, zorder=0, label="Defensive", c="tab:ora
 ## Heat maps 
 Using where we left off with the jumps example, we are able to visualizze the same data as a heatmap:
 ```
+from mplbasketball.heatmap import heatmap
 # Redraw court with different line_color because heatmap is dark
 fig, ax = nba_court.draw(ncols=2, orientation="vd", line_color="white")
 
 ax[0].set_title("Offensive jumps", font="Helvetica")
-hm.heatmap(ax[0], x_off_d, y_off_d, grid_x=300, grid_y=300, sigma=10.)
+heatmap(ax[0], x_off_d, y_off_d, grid_x=300, grid_y=300, sigma=10.)
 ax[1].set_title("Defensive jumps", font="Helvetica")
-hm.heatmap(ax[1], x_def_d, y_def_d, grid_x=300, grid_y=300, sigma=10.)
+heatmap(ax[1], x_def_d, y_def_d, grid_x=300, grid_y=300, sigma=10.)
 ```
 
 <p align="center">
