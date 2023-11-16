@@ -29,7 +29,7 @@ from matplotlib.court import Court
 
 nba_court = Court(court_type="nba")
 
-fig, ax = nba_court.draw()
+fig, ax = nba_court.draw(orientation="h", showaxis=True)
 ```
 <p align="center">
   <img src="./figs/court_h.png" width="50%">
