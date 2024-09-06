@@ -1,5 +1,5 @@
 <p>
-  <img src="./figs/mplbb_logo.png" width="50%">
+  <img src="https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/figs/mplbb_logo.png" width="50%">
 </p>
 
 **A Python plotting library to visualize basketball data, created by the Sport Performance Lab (SPL) at Maple Leaf Sports & Entertainment (MLSE), Toronto, Canada.**
@@ -19,7 +19,7 @@ court = Court(court_type="nba", origin="center", units="ft")
 fig, ax = court.draw(showaxis=True)
 ```
 <p align="center">
-  <img src="./figs/center_h.png" width="75%">
+  <img src="https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/figs/center_h.png" width=75%>
 </p>
 
 Plot some points on the court:
@@ -33,7 +33,7 @@ y = np.random.uniform(-25, 25, size=n_points)
 ax.scatter(x, y)
 ```
 <p align="center">
-  <img src="./figs/center_h_populated.png" width="75%">
+  <img src="https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/figs/center_h_populated.png" width="75%">
 </p>
 
 # List of capabilities
@@ -77,7 +77,7 @@ The package allows for the origin of the data to be in 5 locations on the court 
 4. `"top-right"`: Center court is at `[-47, -25]`.
 5. `"bottom-right"`: Center court is at `[-47, 25]`.
 
-The origin should be specified in the initial specification of the `Court` object. To see what the x and y ranges are for each origin choice, see [this document](docs/origin_vs_coordinates.pdf). **These origin conventions assume the data is in the left-right direction.**
+The origin should be specified in the initial specification of the `Court` object. To see what the x and y ranges are for each origin choice, see [this document](https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/docs/origin_vs_coordinates.pdf). **These origin conventions assume the data is in the left-right direction.**
 
 ## Transforming data to different orientations
 Often, it is more useful to view data from different perspectives. As mentioned in the preceding section, there are 6 orientations to view 2D spatiotemporal data in `mplbasketball`. The `utils.transform()` function makes it very easy to change perspective. We first load some data in its original form; say we are working with a dataset that uses the `"bottom-left"` part of the court as the origin. 
@@ -126,7 +126,7 @@ ax[3].scatter(x_2_vu, y_2_vu, s=5, c="tab:orange")
 ```
 The final result looks like this:
 <p align="center">
-  <img src="./figs/multi_orientation.png" width="100%">
+  <img src="https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/figs/multi_orientation.png" width="100%">
 </p>
 
 Some notes about the above: 
@@ -153,7 +153,7 @@ ax.set_zlim([0, zlim])
 draw_court_3d(ax, origin=np.array([0.0, 0.0]), line_width=2)
 ```
 <p align="center">
-  <img src="./figs/court3d.png" width="100%">
+  <img src="https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/figs/court3d.png" width="100%">
 </p>
 
 ## Interfacing with matplotlib functions
@@ -189,7 +189,7 @@ ax.hexbin(x_1_hl, y_1_hl, gridsize=(24, 18), extent=(0, 47, 0, 50), zorder=0)
 ax.hexbin(x_2_hr, y_2_hr, gridsize=(24, 18), extent=(47, 94, 0, 50), zorder=0 , cmap="hot")
 ``` 
 <p align="center">
-  <img src="./figs/hexbin.png" width="75%">
+  <img src="https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/figs/hexbin.png" width="75%">
 </p>
 
 ### Heatmaps
@@ -210,11 +210,11 @@ ax.imshow(heatmap_2.T, extent=extent_2, origin='lower', cmap='cividis', zorder=-
 
 ```
 <p align="center">
-  <img src="./figs/heatmap.png" width="75%">
+  <img src="https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/figs/heatmap.png" width="75%">
 </p>
 
 # Documentation
-Full documentation coming soon. In the meantime, check out the examples in this README, as well as some of our [examples](./examples/)!
+Full documentation coming soon. In the meantime, check out the examples in this README, as well as some of our [examples](https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/examples/)!
 
 # Contribute
 We welcome feedback and contributions to this package - browse the [open issues](https://github.com/mlsedigital/mplbasketball/issues), or open a [pull request](https://github.com/mlsedigital/mplbasketball/pulls)!
@@ -224,4 +224,4 @@ This package is takes inspiration from [mplsoccer](https://github.com/andrewRowl
 
 # License
 
-[MIT](./LICENSE.txt)
+[MIT](https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/LICENSE.txt)
