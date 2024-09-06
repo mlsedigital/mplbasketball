@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "mplbasketball"
 version = "1.0.0"
-description = "A Python plotting library to facilitate visualization of basketball data."
+description = "A Python plotting library for visualization of basketball data."
 authors = ["Sreekar Voleti <sreekar.voleti@mlse.com>"]
 license = "MIT"
 readme = "README.md"

@@ -220,7 +220,7 @@ Full documentation coming soon. In the meantime, check out the examples in this 
 We welcome feedback and contributions to this package - browse the [open issues](https://github.com/mlsedigital/mplbasketball/issues), or open a [pull request](https://github.com/mlsedigital/mplbasketball/pulls)!
 
 # Inspirations
-This package is takes inspiration from [mplsoccer](https://github.com/andrewRowlinson/mplsoccer), one of the first and best-written sports plotting libraries. Many of the structural decisions made here have been inspired by mplsoccer's `Pitch` class. 
+This package takes inspiration from [mplsoccer](https://github.com/andrewRowlinson/mplsoccer), one of the first and best-written sports plotting libraries. Many of the structural decisions made here have been inspired by mplsoccer's `Pitch` class. 
 
 # License
 
