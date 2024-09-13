@@ -2,9 +2,14 @@ nba_court_parameters = {
     "court_dims": [94.0, 50.0],
     # Hoop area
     "hoop_distance_from_edge": 5.25,
-    "hoop_diameter": 0.75,
+    "hoop_radius": 0.75,
+    # backboard parameters
     "backboard_distance_from_edge": 4.0,
     "backboard_width": 6.0,
+    "backboard_height": 3.5,
+    "backboard_inner_rect_width": 2.0,
+    "backboard_inner_rect_height": 1.5,
+    "backboard_inner_rect_from_bottom": 1.0,
     "charge_circle_radius": 4.0,
     "charge_circle_side_length": 3.0,
     # Inbound lines
@@ -17,8 +22,8 @@ nba_court_parameters = {
     # Inner paint
     "inner_paint_dims": [18.0 + 5 / 6, 12 - 1 / 3],
     # Center circle
-    "outer_circle_diameter": 6.0,
-    "inner_circle_diameter": 2.0,
+    "outer_circle_radius": 6.0,
+    "inner_circle_radius": 2.0,
     # Three point area
     "three_point_arc_angle": 68.13,
     "three_point_arc_diameter": 47.5,
@@ -32,9 +37,15 @@ wnba_court_parameters = {
     "court_dims": [94.0, 50.0],
     # Hoop area
     "hoop_distance_from_edge": 5.25,
-    "hoop_diameter": 0.75,
+    "hoop_radius": 0.75, # radius?
+    # backboard properties
     "backboard_distance_from_edge": 4.0,
     "backboard_width": 6.0,
+    "backboard_height": 3.5,
+    "backboard_inner_rect_width": 2.0,
+    "backboard_inner_rect_height": 1.5,
+    "backboard_inner_rect_from_bottom": 1.0,
+    # court properties
     "charge_circle_radius": 4.0,
     "charge_circle_side_length": 3.0,
     # Inbound lines
@@ -47,8 +58,8 @@ wnba_court_parameters = {
     # Inner paint
     "inner_paint_dims": [18.0 + 5 / 6, 12 - 1 / 3],
     # Center circle
-    "outer_circle_diameter": 6.0,
-    "inner_circle_diameter": 2.0,
+    "outer_circle_radius": 6.0,
+    "inner_circle_radius": 2.0,
     # Three point area
     "three_point_arc_angle": 83.51692630710276,
     "three_point_arc_diameter": 44.365,
@@ -62,9 +73,15 @@ ncaa_court_parameters = {
     "court_dims": [94.0, 50.0],
     # Hoop area
     "hoop_distance_from_edge": 5.25,
-    "hoop_diameter": 0.75,
+    "hoop_radius": 0.75,
+    # backboard properties
     "backboard_distance_from_edge": 4.0,
     "backboard_width": 6.0,
+    "backboard_height": 3.5,
+    "backboard_inner_rect_width": 2.0,
+    "backboard_inner_rect_height": 1.5,
+    "backboard_inner_rect_from_bottom": 1.0,
+    # court properties
     "charge_circle_radius": 4.0,
     "charge_circle_side_length": 3.0,
     # Inbound lines
@@ -77,8 +94,8 @@ ncaa_court_parameters = {
     # Inner paint
     "inner_paint_dims": [18.0 + 5 / 6, 12 - 1 / 3],
     # Center circle
-    "outer_circle_diameter": 6.0,
-    "inner_circle_diameter": 6.0,
+    "outer_circle_radius": 6.0,
+    "inner_circle_radius": 6.0,
     # Three point area
     "three_point_arc_angle": 78.95,
     "three_point_arc_diameter": 44.218,

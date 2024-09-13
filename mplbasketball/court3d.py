@@ -28,8 +28,8 @@ class Court3D:
     """
 
     def __init__(self, court_type="nba", origin=np.array([0.0, 0.0]), units="ft"):
-
-        assert court_type in ["nba", "wnba"], "Invalid court_type. Please choose from [nba, wnba]"
+        
+        assert court_type in ["nba", "wnba", "ncaa"], "Invalid court_type. Please choose from [nba, wnba]"
         assert units in ["ft", "m"], "Invalid units. Please choose from ['ft', 'm']"
 
         self.court_type = court_type
@@ -506,7 +506,7 @@ class Court3D:
             ax,
             origin_shift_x,
             origin_shift_y,
-            self.court_parameters["outer_circle_diameter"],
+            self.court_parameters["outer_circle_radius"],
             line_width=line_width,
             line_color=line_color,
             line_style="-",
@@ -518,7 +518,7 @@ class Court3D:
             ax,
             origin_shift_x,
             origin_shift_y,
-            self.court_parameters["inner_circle_diameter"],
+            self.court_parameters["inner_circle_radius"],
             line_width=line_width,
             line_color=line_color,
             line_style="-",
@@ -616,10 +616,89 @@ def draw_court_3d(
         pad=pad,
     )
 
-    # Draw the hoop and backboard line at the appropriate height
+    # hoop_points: the number of points to sample around the circle
+    n_hoop = 100
+
+    # unit vectors for nudging points around
+    ihat = np.array([[1.0, 0.0, 0.0]]).T
+    jhat = np.array([[0.0, 1.0, 0.0]]).T
+    khat = np.array([[0.0, 0.0, 1.0]]).T
+
+    # Offsets of court-features from the origin
+    # bb : backboard
+    # ss : sweet-spot (the inner rectangle of the backboard)
+    # hoop: the hoop
+    # x-offsets are for mirroring about x
+    # z-offsets for verticality
+    bb_xoffset = court.court_parameters['backboard_distance_from_edge'] - court.court_parameters['court_dims'][0]/2
+    bb_zoffset = court.court_parameters['hoop_height'] - court.court_parameters['backboard_inner_rect_from_bottom']
+    ss_zoffset = court.court_parameters['hoop_height']
+    hoop_xoffset = court.court_parameters['hoop_distance_from_edge'] - court.court_parameters['court_dims'][0]/2
+    hoop_zoffset = court.court_parameters['hoop_height']
     origin_shift_x, origin_shift_y = -court.origin
     court_x, court_y = court.court_parameters["court_dims"]
 
+
+    # helper functions for building the hoop geometry
+    # vrectangle_pts: creates a closed (meaning the last point is
+    # a duplicate of the first point) rectangle with given height and width
+    # where it is symmetric about the x-axis, and situated above the
+    # xy plane
+    vrectangle_pts = lambda w, h: np.array([
+        [origin_shift_x, origin_shift_y - w/2, 0.0],
+        [origin_shift_x, origin_shift_y - w/2, h],
+        [origin_shift_x, origin_shift_y + w/2, h],
+        [origin_shift_x, origin_shift_y + w/2, 0.0],
+        [origin_shift_x, origin_shift_y - w/2, 0.0]
+    ]).T
+
+    # hcircle_pts generates points to create a horizontal circle
+    hcircle_pts = lambda radius, n: np.array([
+        origin_shift_x + radius * np.cos(np.linspace(0, 2*np.pi, n)),
+        origin_shift_y + radius * np.sin(np.linspace(0, 2*np.pi, n)),
+        np.zeros(n)
+    ])
+
+    # Generate the points for each of the backboards/hoops
+    bb_pts = vrectangle_pts(
+        court.court_parameters['backboard_width'],
+        court.court_parameters['backboard_height']
+    )
+
+    ss_pts = vrectangle_pts(
+        court.court_parameters['backboard_inner_rect_width'],
+        court.court_parameters['backboard_inner_rect_height']
+    )
+
+    # Generate raw points for the hoops
+    hoop_pts = hcircle_pts(
+        court.court_parameters['hoop_radius'],
+        n_hoop
+    )
+
+    # do the offsets for both sides
+    # backboards
+    lbb = bb_pts + bb_xoffset * ihat + bb_zoffset * khat
+    rbb = bb_pts - bb_xoffset * ihat + bb_zoffset * khat
+
+    # sweet spots
+    lss = ss_pts + bb_xoffset * ihat + ss_zoffset * khat
+    rss = ss_pts - bb_xoffset * ihat + ss_zoffset * khat
+
+    # hoops
+    lhoop = hoop_pts + hoop_xoffset * ihat + hoop_zoffset * khat
+    rhoop = hoop_pts - hoop_xoffset * ihat + hoop_zoffset * khat
+
+    # draw the hoops and backboards
+    ax3d.plot(*rbb, color = hoop_color, linewidth = line_width/2)
+    ax3d.plot(*lbb, color = hoop_color, linewidth = line_width/2)
+    ax3d.plot(*rss, color = hoop_color, linewidth = line_width/4)
+    ax3d.plot(*lss, color = hoop_color, linewidth = line_width/4)
+    ax3d.plot(*lhoop, color = hoop_color, linewidth = line_width)
+    ax3d.plot(*rhoop, color = hoop_color, linewidth = line_width)
+
+
+    '''
     # Draw the hoops
     left_hoop_x = origin_shift_x - court_x / 2 + court.court_parameters["hoop_distance_from_edge"]
     right_hoop_x = origin_shift_x + court_x / 2 - court.court_parameters["hoop_distance_from_edge"]
@@ -687,7 +766,7 @@ def draw_court_3d(
 
     x, y = right_bb.get_data()
     ax3d.plot(x, y, zs=court.court_parameters["hoop_height"], zdir="z", color=hoop_color)
-
+    '''
     # For each line in the 2D plot, create a corresponding line in the 3D plot
     for line in ax2d.lines:
         x, y = line.get_data()

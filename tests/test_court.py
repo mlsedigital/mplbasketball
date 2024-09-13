@@ -1,9 +1,7 @@
 # Testing basic 2D court plotting functionality
-
 import matplotlib.pyplot as plt
 import pytest
 from mplbasketball import Court
-
 
 @pytest.mark.mpl_image_compare(baseline_dir="baseline")
 def test_basic_court_generation():
