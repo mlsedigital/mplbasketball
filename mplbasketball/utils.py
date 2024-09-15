@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def transform(x, y, fr, to, origin, court_dims=[94.0, 50.0]):
     """
     Function to transform a set of x, y values to match orientations desired for plotting.
