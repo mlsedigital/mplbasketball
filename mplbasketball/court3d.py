@@ -1,8 +1,9 @@
-import numpy as np
 import matplotlib as mpl
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
 import matplotlib.lines as lines
+import matplotlib.patches as patches
+import matplotlib.pyplot as plt
+import numpy as np
+
 from mplbasketball.court_params import _get_court_params_in_desired_units
 
 
