@@ -12,7 +12,7 @@ class Court3D:
     A class to represent a basketball court and facilitate its plotting.
 
     Attributes:
-    - court_type (str): Type of the court, either 'nba', 'wnba', or 'ncaa'.
+    - court_type (str): Type of the court, either 'nba', 'wnba', 'ncaa' or 'fiba'.
     - units (str): Units of the court dimensions, either 'ft' or 'm'.
     - court_parameters (dict): Parameters defining the dimensions and characteristics of the court.
     - origin (np.array): The origin point of the court.
@@ -22,15 +22,15 @@ class Court3D:
         Draws the basketball court according to specified parameters.
 
     Args:
-    - court_type (str): Specifies the type of basketball court ('nba' or 'wnba'). Defaults to 'nba'.
+    - court_type (str): Specifies the type of basketball court ('nba', 'wnba', 'ncaa' or 'fiba'). Defaults to 'nba'.
 
     Raises:
-    - AssertionError: If the provided court_type is not 'nba', 'wnba', or 'ncaa'.
+    - AssertionError: If the provided court_type is not 'nba', 'wnba', 'ncaa' or 'fiba'.
     """
 
     def __init__(self, court_type="nba", origin=np.array([0.0, 0.0]), units="ft"):
         
-        assert court_type in ["nba", "wnba", "ncaa", "fiba"], "Invalid court_type. Please choose from [nba, wnba]"
+        assert court_type in ["nba", "wnba", "ncaa", "fiba"], "Invalid court_type. Please choose from [nba, wnba, ncaa, fiba]"
         assert units in ["ft", "m"], "Invalid units. Please choose from ['ft', 'm']"
 
         self.court_type = court_type

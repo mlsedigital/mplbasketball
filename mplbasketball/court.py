@@ -53,7 +53,7 @@ class Court:
     A class to represent a basketball court and facilitate its plotting.
 
     Attributes:
-    - court_type (str): Type of the court, either 'nba', 'wnba', or 'ncaa'.
+    - court_type (str): Type of the court, either 'nba', 'wnba', 'ncaa' or 'fiba'.
     - units (str): Units of the court dimensions, either 'ft' or 'm'.
     - court_parameters (dict): Parameters defining the dimensions and characteristics of the court.
     - origin (np.array): The origin point of the court.
@@ -63,10 +63,10 @@ class Court:
         Draws the basketball court according to specified parameters.
 
     Args:
-    - court_type (str): Specifies the type of basketball court ('nba' or 'wnba'). Defaults to 'nba'.
+    - court_type (str): Specifies the type of basketball court ('nba', 'wnba', 'ncaa' or 'fiba'). Defaults to 'nba'.
 
     Raises:
-    - AssertionError: If the provided court_type is not 'nba', 'wnba', or 'ncaa'.
+    - AssertionError: If the provided court_type is not 'nba', 'wnba', 'ncaa' or 'fiba'.
     """
 
     def __init__(self, court_type="nba", origin="top-left", units="ft"):
@@ -75,7 +75,7 @@ class Court:
             "wnba",
             "ncaa",
             "fiba",
-        ], "Invalid court_type. Please choose from ['nba', 'wnba', 'ncaa']"
+        ], "Invalid court_type. Please choose from ['nba', 'wnba', 'ncaa', 'fiba']"
         assert origin in [
             "center",
             "top-left",
