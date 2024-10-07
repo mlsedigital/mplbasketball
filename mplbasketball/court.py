@@ -365,7 +365,7 @@ class Court:
                 ax,
                 left_hoop_x,
                 origin_shift_y,
-                self.court_parameters["hoop_diameter"],
+                self.court_parameters["hoop_radius"],
                 line_width=line_width,
                 line_color=line_color,
                 line_style="-",
@@ -378,7 +378,7 @@ class Court:
                 ax,
                 right_hoop_x,
                 origin_shift_y,
-                self.court_parameters["hoop_diameter"],
+                self.court_parameters["hoop_radius"],
                 line_width=line_width,
                 line_color=line_color,
                 line_style="-",
@@ -414,7 +414,7 @@ class Court:
                 line_style="-",
                 alpha=hoop_alpha,
             )
-
+        
         # Draw charge circles
         charge_diameter = 2 * self.court_parameters["charge_circle_radius"]
         # Left side
@@ -768,7 +768,7 @@ class Court:
             ax,
             origin_shift_x,
             origin_shift_y,
-            self.court_parameters["outer_circle_diameter"],
+            self.court_parameters["outer_circle_radius"],
             line_width=line_width,
             line_color=line_color,
             line_style="-",
@@ -780,7 +780,7 @@ class Court:
             ax,
             origin_shift_x,
             origin_shift_y,
-            self.court_parameters["inner_circle_diameter"],
+            self.court_parameters["inner_circle_radius"],
             line_width=line_width,
             line_color=line_color,
             line_style="-",
@@ -879,7 +879,7 @@ class Court:
                 ax,
                 -origin_shift_y,
                 left_hoop_x,
-                self.court_parameters["hoop_diameter"],
+                self.court_parameters["hoop_radius"],
                 line_width=line_width,
                 line_color=line_color,
                 line_style="-",
@@ -892,7 +892,7 @@ class Court:
                 ax,
                 -origin_shift_y,
                 right_hoop_x,
-                self.court_parameters["hoop_diameter"],
+                self.court_parameters["hoop_radius"],
                 line_width=line_width,
                 line_color=line_color,
                 line_style="-",
