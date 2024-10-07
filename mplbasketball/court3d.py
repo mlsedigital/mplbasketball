@@ -30,7 +30,7 @@ class Court3D:
 
     def __init__(self, court_type="nba", origin=np.array([0.0, 0.0]), units="ft"):
         
-        assert court_type in ["nba", "wnba", "ncaa"], "Invalid court_type. Please choose from [nba, wnba]"
+        assert court_type in ["nba", "wnba", "ncaa", "fiba"], "Invalid court_type. Please choose from [nba, wnba]"
         assert units in ["ft", "m"], "Invalid units. Please choose from ['ft', 'm']"
 
         self.court_type = court_type
