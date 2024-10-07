@@ -53,7 +53,7 @@ class Court:
     A class to represent a basketball court and facilitate its plotting.
 
     Attributes:
-    - court_type (str): Type of the court, either 'nba', 'wnba', or 'ncaa'.
+    - court_type (str): Type of the court, either 'nba', 'wnba', 'ncaa' or 'fiba'.
     - units (str): Units of the court dimensions, either 'ft' or 'm'.
     - court_parameters (dict): Parameters defining the dimensions and characteristics of the court.
     - origin (np.array): The origin point of the court.
@@ -63,19 +63,19 @@ class Court:
         Draws the basketball court according to specified parameters.
 
     Args:
-    - court_type (str): Specifies the type of basketball court ('nba' or 'wnba'). Defaults to 'nba'.
+    - court_type (str): Specifies the type of basketball court ('nba', 'wnba', 'ncaa' or 'fiba'). Defaults to 'nba'.
 
     Raises:
-    - AssertionError: If the provided court_type is not 'nba', 'wnba', or 'ncaa'.
+    - AssertionError: If the provided court_type is not 'nba', 'wnba', 'ncaa' or 'fiba'.
     """
 
     def __init__(self, court_type="nba", origin="top-left", units="ft"):
-
         assert court_type in [
             "nba",
             "wnba",
             "ncaa",
-        ], "Invalid court_type. Please choose from ['nba', 'wnba', 'ncaa']"
+            "fiba",
+        ], "Invalid court_type. Please choose from ['nba', 'wnba', 'ncaa', 'fiba']"
         assert origin in [
             "center",
             "top-left",
@@ -287,7 +287,6 @@ class Court:
         hoop_alpha,
         pad,
     ):
-
         origin_shift_x, origin_shift_y = -self.origin
         court_x, court_y = self.court_parameters["court_dims"]
         cf = line_width / 2
@@ -353,12 +352,8 @@ class Court:
         inner_paint_x, inner_paint_y = self.court_parameters["inner_paint_dims"]
 
         # Draw the hoops
-        left_hoop_x = (
-            origin_shift_x - court_x / 2 + self.court_parameters["hoop_distance_from_edge"]
-        )
-        right_hoop_x = (
-            origin_shift_x + court_x / 2 - self.court_parameters["hoop_distance_from_edge"]
-        )
+        left_hoop_x = origin_shift_x - court_x / 2 + self.court_parameters["hoop_distance_from_edge"]
+        right_hoop_x = origin_shift_x + court_x / 2 - self.court_parameters["hoop_distance_from_edge"]
         # Left side
         if half is None or half == "l":
             self._draw_circle(
@@ -414,7 +409,7 @@ class Court:
                 line_style="-",
                 alpha=hoop_alpha,
             )
-        
+
         # Draw charge circles
         charge_diameter = 2 * self.court_parameters["charge_circle_radius"]
         # Left side
@@ -800,7 +795,6 @@ class Court:
         hoop_alpha,
         pad,
     ):
-
         court_x, court_y = self.court_parameters["court_dims"]
         origin_shift_x, origin_shift_y = -self.origin
 
@@ -867,12 +861,8 @@ class Court:
         inner_paint_x, inner_paint_y = self.court_parameters["inner_paint_dims"]
 
         # Draw the hoops
-        left_hoop_x = (
-            origin_shift_x - court_x / 2 + self.court_parameters["hoop_distance_from_edge"]
-        )
-        right_hoop_x = (
-            origin_shift_x + court_x / 2 - self.court_parameters["hoop_distance_from_edge"]
-        )
+        left_hoop_x = origin_shift_x - court_x / 2 + self.court_parameters["hoop_distance_from_edge"]
+        right_hoop_x = origin_shift_x + court_x / 2 - self.court_parameters["hoop_distance_from_edge"]
         # Left side
         if half is None or half == "d":
             self._draw_circle(
@@ -1286,7 +1276,7 @@ class Court:
             ax,
             -origin_shift_y,
             origin_shift_x,
-            self.court_parameters["outer_circle_diameter"],
+            self.court_parameters["outer_circle_radius"],
             line_width=line_width,
             line_color=line_color,
             line_style="-",
@@ -1299,7 +1289,7 @@ class Court:
             ax,
             -origin_shift_y,
             origin_shift_x,
-            self.court_parameters["inner_circle_diameter"],
+            self.court_parameters["inner_circle_radius"],
             line_width=line_width,
             line_color=line_color,
             line_style="-",
@@ -1307,9 +1297,7 @@ class Court:
             alpha=line_alpha,
         )
 
-    def _draw_rectangle(
-        self, ax, x0, y0, len_x, len_y, line_width, line_color, line_style, face_color, alpha
-    ):
+    def _draw_rectangle(self, ax, x0, y0, len_x, len_y, line_width, line_color, line_style, face_color, alpha):
         rectangle = patches.Rectangle(
             (x0, y0),
             len_x,
@@ -1341,9 +1329,7 @@ class Court:
         )
         ax.add_line(line)
 
-    def _draw_circle(
-        self, ax, x0, y0, diameter, line_width, line_color, line_style, face_color, alpha
-    ):
+    def _draw_circle(self, ax, x0, y0, diameter, line_width, line_color, line_style, face_color, alpha):
         circle = patches.Circle(
             (x0, y0),
             diameter,

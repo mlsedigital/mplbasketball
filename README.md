@@ -109,7 +109,7 @@ from mplbasketball.utils import transform
 # Initialize Court object
 origin = "bottom-left"
 court = Court(origin=origin)
-fig, ax = plt.subplots(1, 3)
+fig, ax = plt.subplots(1, 4)
 
 # Simulate some data
 n_pts = 100
@@ -121,8 +121,8 @@ y_2 = np.random.uniform(0, 50, size=n_pts)
 
 # On the first subplot, plot the data as is
 court.draw(ax[0], )
-ax[0].scatter(x, y, s=5, c="tab:blue")
-ax[0].scatter(x, y, s=5, c="tab:orange")
+ax[0].scatter(x_1, y_1, s=5, c="tab:blue")
+ax[0].scatter(x_2, y_2, s=5, c="tab:orange")
 ```
 
 Now, say we want to visualize the first (blue) dataset normalized to the left side, and the second (orange) dataset normalized to the right.
