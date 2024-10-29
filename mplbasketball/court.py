@@ -18,7 +18,7 @@ class LineDataUnits(lines.Line2D):
             trans = self.axes.transData.transform
             return ((trans((1, self._lw_data)) - trans((0, 0))) * ppd)[1]
         else:
-            return 1
+            return self._lw_data
 
     def _set_lw(self, lw):
         self._lw_data = lw
@@ -40,7 +40,7 @@ class PatchDataUnits(patches.PathPatch):
             # the line mentioned below
             return ((trans((self._lw_data, self._lw_data)) - trans((0, 0))) * ppd)[1]
         else:
-            return 1
+            return self._lw_data
 
     def _set_lw(self, lw):
         self._lw_data = lw
