@@ -1,7 +1,10 @@
+from typing import Literal
+
 import matplotlib.lines as lines
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.axes import Axes
 
 from mplbasketball.court_params import _get_court_params_in_desired_units
 
@@ -69,13 +72,19 @@ class Court:
     - AssertionError: If the provided court_type is not 'nba', 'wnba', 'ncaa' or 'fiba'.
     """
 
-    def __init__(self, court_type="nba", origin="top-left", units="ft"):
+    def __init__(
+        self,
+        court_type: Literal["nba", "wnba", "ncaa", "fiba"] = "nba",
+        origin: Literal["center", "top-left", "bottom-left", "top-right", "bottom-right"] = "top-left",
+        units: Literal["ft", "m"] = "ft",
+    ):
         assert court_type in [
             "nba",
             "wnba",
             "ncaa",
             "fiba",
         ], "Invalid court_type. Please choose from ['nba', 'wnba', 'ncaa', 'fiba']"
+
         assert origin in [
             "center",
             "top-left",
@@ -83,6 +92,7 @@ class Court:
             "top-right",
             "bottom-right",
         ], "Invalid origin. Choose from 'center', '(top/bottom)-(left/right)'"
+
         assert units in ["m", "ft"], "Invalid units. Currently only 'm' and 'ft' are supported"
 
         self.court_type = court_type
@@ -122,8 +132,8 @@ class Court:
 
     def draw(
         self,
-        ax=None,
-        orientation="h",
+        ax: Axes = None,
+        orientation: Literal["v", "h", "hl", "hr", "vu", "vd"] = "h",
         nrows=1,
         ncols=1,
         dpi=200,
@@ -171,6 +181,7 @@ class Court:
             "vu",
             "vd",
         ], "Invalid orientation. Choose 'horizontal' or 'vertical'"
+
         assert dpi >= 200, "DPI is too low"
 
         if len(orientation) > 1:
@@ -277,7 +288,7 @@ class Court:
 
     def _draw_horizontal_court(
         self,
-        ax,
+        ax: Axes,
         half,
         court_color,
         paint_color,
@@ -785,7 +796,7 @@ class Court:
 
     def _draw_vertical_court(
         self,
-        ax,
+        ax: Axes,
         half,
         court_color,
         paint_color,
@@ -1297,7 +1308,19 @@ class Court:
             alpha=line_alpha,
         )
 
-    def _draw_rectangle(self, ax, x0, y0, len_x, len_y, line_width, line_color, line_style, face_color, alpha):
+    def _draw_rectangle(
+        self,
+        ax: Axes,
+        x0: float | int,
+        y0: float | int,
+        len_x: float | int,
+        len_y: float | int,
+        line_width,
+        line_color,
+        line_style,
+        face_color,
+        alpha,
+    ):
         rectangle = patches.Rectangle(
             (x0, y0),
             len_x,
@@ -1318,7 +1341,18 @@ class Court:
         )
         ax.add_patch(pathpatch)
 
-    def _draw_line(self, ax, x0, y0, dx, dy, line_width, line_color, line_style, alpha):
+    def _draw_line(
+        self,
+        ax: Axes,
+        x0: float | int,
+        y0: float | int,
+        dx: float | int,
+        dy: float | int,
+        line_width,
+        line_color,
+        line_style,
+        alpha,
+    ):
         line = LineDataUnits(
             [x0, x0 + dx],
             [y0, y0 + dy],
@@ -1329,7 +1363,18 @@ class Court:
         )
         ax.add_line(line)
 
-    def _draw_circle(self, ax, x0, y0, diameter, line_width, line_color, line_style, face_color, alpha):
+    def _draw_circle(
+        self,
+        ax: Axes,
+        x0: float | int,
+        y0: float | int,
+        diameter,
+        line_width,
+        line_color,
+        line_style,
+        face_color,
+        alpha,
+    ):
         circle = patches.Circle(
             (x0, y0),
             diameter,
@@ -1350,7 +1395,18 @@ class Court:
         ax.add_patch(pathpatch)
 
     def _draw_circular_arc(
-        self, ax, x0, y0, diameter, angle, theta1, theta2, line_width, line_color, line_style, alpha
+        self,
+        ax: Axes,
+        x0: float | int,
+        y0: float | int,
+        diameter,
+        angle: float,
+        theta1: float,
+        theta2: float,
+        line_width,
+        line_color,
+        line_style,
+        alpha,
     ):
         circular_arc = patches.Arc(
             (x0, y0),
