@@ -1,3 +1,5 @@
+from typing import Literal
+
 nba_court_parameters = {
     "court_dims": [94.0, 50.0],
     # Hoop area
@@ -143,7 +145,9 @@ fiba_court_parameters = {
 }
 
 
-def _get_court_params_in_desired_units(court_type, desired_units):
+def _get_court_params_in_desired_units(
+    court_type: Literal["nba", "wnba", "ncaa", "fiba"], desired_units: Literal["m", "ft"]
+):
     """
     Function to convert court parameters to units of choice.
     """

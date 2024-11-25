@@ -1,10 +1,16 @@
+from typing import Literal
+
 import matplotlib as mpl
 import matplotlib.lines as lines
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.axes import Axes
+from matplotlib.figure import Figure
 
 from mplbasketball.court_params import _get_court_params_in_desired_units
+
+Color = tuple[float, float, float] | str
 
 
 class Court3D:
@@ -29,8 +35,12 @@ class Court3D:
     """
 
     def __init__(self, court_type="nba", origin=np.array([0.0, 0.0]), units="ft"):
-        
-        assert court_type in ["nba", "wnba", "ncaa", "fiba"], "Invalid court_type. Please choose from [nba, wnba, ncaa, fiba]"
+        assert court_type in [
+            "nba",
+            "wnba",
+            "ncaa",
+            "fiba",
+        ], "Invalid court_type. Please choose from [nba, wnba, ncaa, fiba]"
         assert units in ["ft", "m"], "Invalid units. Please choose from ['ft', 'm']"
 
         self.court_type = court_type
@@ -40,16 +50,16 @@ class Court3D:
 
     def draw(
         self,
-        ax,
+        ax: Axes,
         showaxis=False,
         court_color="none",
         paint_color="none",
         line_color="black",
         line_alpha=1.0,
-        line_width=None,
+        line_width: float = None,
         hoop_alpha=1.0,
         pad=5.0,
-    ):
+    ) -> tuple[Figure, Axes] | Figure:
         """
         Draws the basketball court according to specified parameters.
 
@@ -100,9 +110,8 @@ class Court3D:
         return ax
 
     def _draw_horizontal_court(
-        self, ax, court_color, paint_color, line_color, line_alpha, line_width, hoop_alpha, pad
+        self, ax: Axes, court_color, paint_color, line_color, line_alpha, line_width, hoop_alpha, pad
     ):
-
         angle_a = 9.7800457882  # Angle 1 for lower FT line
         angle_b = 12.3415314172  # Angle 2 for lower FT line
 
@@ -158,12 +167,8 @@ class Court3D:
 
         # Draw charge circles
         charge_diameter = 2 * self.court_parameters["charge_circle_radius"]
-        left_hoop_x = (
-            origin_shift_x - court_x / 2 + self.court_parameters["hoop_distance_from_edge"]
-        )
-        right_hoop_x = (
-            origin_shift_x + court_x / 2 - self.court_parameters["hoop_distance_from_edge"]
-        )
+        left_hoop_x = origin_shift_x - court_x / 2 + self.court_parameters["hoop_distance_from_edge"]
+        right_hoop_x = origin_shift_x + court_x / 2 - self.court_parameters["hoop_distance_from_edge"]
         # Left side
         self._draw_circular_arc(
             ax,
@@ -528,7 +533,17 @@ class Court3D:
         )
 
     def _draw_rectangle(
-        self, ax, x0, y0, len_x, len_y, line_width, line_color, line_style, face_color, alpha
+        self,
+        ax: Axes,
+        x0: float | int,
+        y0: float | int,
+        len_x: float | int,
+        len_y: float | int,
+        line_width,
+        line_color,
+        line_style,
+        face_color,
+        alpha,
     ):
         rectangle = patches.Rectangle(
             (x0, y0),
@@ -542,7 +557,18 @@ class Court3D:
         )
         ax.add_patch(rectangle)
 
-    def _draw_line(self, ax, x0, y0, dx, dy, line_width, line_color, line_style, alpha):
+    def _draw_line(
+        self,
+        ax: Axes,
+        x0: float | int,
+        y0: float | int,
+        dx: float | int,
+        dy: float | int,
+        line_width,
+        line_color,
+        line_style,
+        alpha,
+    ):
         line = lines.Line2D(
             [x0, x0 + dx],
             [y0, y0 + dy],
@@ -554,7 +580,16 @@ class Court3D:
         ax.add_line(line)
 
     def _draw_circle(
-        self, ax, x0, y0, diameter, line_width, line_color, line_style, face_color, alpha
+        self,
+        ax: Axes,
+        x0: float | int,
+        y0: float | int,
+        diameter: float | int,
+        line_width: float | int,
+        line_color: Color,
+        line_style,
+        face_color,
+        alpha,
     ):
         circle = patches.Circle(
             (x0, y0),
@@ -568,7 +603,18 @@ class Court3D:
         ax.add_patch(circle)
 
     def _draw_circular_arc(
-        self, ax, x0, y0, diameter, angle, theta1, theta2, line_width, line_color, line_style, alpha
+        self,
+        ax: Axes,
+        x0: float | int,
+        y0: float | int,
+        diameter: float | int,
+        angle: float | int,
+        theta1: float | int,
+        theta2: float | int,
+        line_width: float | int,
+        line_color: Color,
+        line_style,
+        alpha,
     ):
         circular_arc = patches.Arc(
             (x0, y0),
@@ -589,20 +635,19 @@ class Court3D:
 
 def draw_court_3d(
     ax3d,
-    showaxis=False,
-    court_type="nba",
-    units="ft",
-    court_color="none",
-    paint_color="none",
-    line_color="black",
-    line_alpha=1.0,
-    line_width=2,
-    hoop_color="black",
-    hoop_alpha=1.0,
-    pad=5.0,
-    origin=np.array([0.0, 0.0]),
+    showaxis: bool = False,
+    court_type: Literal["nba", "wnba", "ncaa", "fiba"] = "nba",
+    units: Literal["ft", "m"] = "ft",
+    court_color: str = "none",
+    paint_color: str = "none",
+    line_color: str = "black",
+    line_alpha: float = 1.0,
+    line_width: float = 2,
+    hoop_color: str = "black",
+    hoop_alpha: float = 1.0,
+    pad: float = 5.0,
+    origin: np.ndarray = np.array([0.0, 0.0]),
 ):
-
     fig2d, ax2d = plt.subplots()
     court = Court3D(court_type=court_type, origin=origin, units=units)
     court.draw(
@@ -631,51 +676,51 @@ def draw_court_3d(
     # hoop: the hoop
     # x-offsets are for mirroring about x
     # z-offsets for verticality
-    bb_xoffset = court.court_parameters['backboard_distance_from_edge'] - court.court_parameters['court_dims'][0]/2
-    bb_zoffset = court.court_parameters['hoop_height'] - court.court_parameters['backboard_inner_rect_from_bottom']
-    ss_zoffset = court.court_parameters['hoop_height']
-    hoop_xoffset = court.court_parameters['hoop_distance_from_edge'] - court.court_parameters['court_dims'][0]/2
-    hoop_zoffset = court.court_parameters['hoop_height']
+    bb_xoffset = court.court_parameters["backboard_distance_from_edge"] - court.court_parameters["court_dims"][0] / 2
+    bb_zoffset = court.court_parameters["hoop_height"] - court.court_parameters["backboard_inner_rect_from_bottom"]
+    ss_zoffset = court.court_parameters["hoop_height"]
+    hoop_xoffset = court.court_parameters["hoop_distance_from_edge"] - court.court_parameters["court_dims"][0] / 2
+    hoop_zoffset = court.court_parameters["hoop_height"]
     origin_shift_x, origin_shift_y = -court.origin
     court_x, court_y = court.court_parameters["court_dims"]
-
 
     # helper functions for building the hoop geometry
     # vrectangle_pts: creates a closed (meaning the last point is
     # a duplicate of the first point) rectangle with given height and width
     # where it is symmetric about the x-axis, and situated above the
     # xy plane
-    vrectangle_pts = lambda w, h: np.array([
-        [origin_shift_x, origin_shift_y - w/2, 0.0],
-        [origin_shift_x, origin_shift_y - w/2, h],
-        [origin_shift_x, origin_shift_y + w/2, h],
-        [origin_shift_x, origin_shift_y + w/2, 0.0],
-        [origin_shift_x, origin_shift_y - w/2, 0.0]
-    ]).T
+    def vrectangle_pts(w: float | int, h: float | int):
+        return np.array(
+            [
+                [origin_shift_x, origin_shift_y - w / 2, 0.0],
+                [origin_shift_x, origin_shift_y - w / 2, h],
+                [origin_shift_x, origin_shift_y + w / 2, h],
+                [origin_shift_x, origin_shift_y + w / 2, 0.0],
+                [origin_shift_x, origin_shift_y - w / 2, 0.0],
+            ]
+        ).T
 
     # hcircle_pts generates points to create a horizontal circle
-    hcircle_pts = lambda radius, n: np.array([
-        origin_shift_x + radius * np.cos(np.linspace(0, 2*np.pi, n)),
-        origin_shift_y + radius * np.sin(np.linspace(0, 2*np.pi, n)),
-        np.zeros(n)
-    ])
+    def hcircle_pts(radius: float | int, n: int):
+        assert isinstance(n, int) and n >= 0, "n must be a non-negative integer"
+
+        return np.array(
+            [
+                origin_shift_x + radius * np.cos(np.linspace(0, 2 * np.pi, n)),
+                origin_shift_y + radius * np.sin(np.linspace(0, 2 * np.pi, n)),
+                np.zeros(n),
+            ]
+        )
 
     # Generate the points for each of the backboards/hoops
-    bb_pts = vrectangle_pts(
-        court.court_parameters['backboard_width'],
-        court.court_parameters['backboard_height']
-    )
+    bb_pts = vrectangle_pts(court.court_parameters["backboard_width"], court.court_parameters["backboard_height"])
 
     ss_pts = vrectangle_pts(
-        court.court_parameters['backboard_inner_rect_width'],
-        court.court_parameters['backboard_inner_rect_height']
+        court.court_parameters["backboard_inner_rect_width"], court.court_parameters["backboard_inner_rect_height"]
     )
 
     # Generate raw points for the hoops
-    hoop_pts = hcircle_pts(
-        court.court_parameters['hoop_radius'],
-        n_hoop
-    )
+    hoop_pts = hcircle_pts(court.court_parameters["hoop_radius"], n_hoop)
 
     # do the offsets for both sides
     # backboards
@@ -691,15 +736,14 @@ def draw_court_3d(
     rhoop = hoop_pts - hoop_xoffset * ihat + hoop_zoffset * khat
 
     # draw the hoops and backboards
-    ax3d.plot(*rbb, color = hoop_color, linewidth = line_width/2)
-    ax3d.plot(*lbb, color = hoop_color, linewidth = line_width/2)
-    ax3d.plot(*rss, color = hoop_color, linewidth = line_width/4)
-    ax3d.plot(*lss, color = hoop_color, linewidth = line_width/4)
-    ax3d.plot(*lhoop, color = hoop_color, linewidth = line_width)
-    ax3d.plot(*rhoop, color = hoop_color, linewidth = line_width)
+    ax3d.plot(*rbb, color=hoop_color, linewidth=line_width / 2)
+    ax3d.plot(*lbb, color=hoop_color, linewidth=line_width / 2)
+    ax3d.plot(*rss, color=hoop_color, linewidth=line_width / 4)
+    ax3d.plot(*lss, color=hoop_color, linewidth=line_width / 4)
+    ax3d.plot(*lhoop, color=hoop_color, linewidth=line_width)
+    ax3d.plot(*rhoop, color=hoop_color, linewidth=line_width)
 
-
-    '''
+    """
     # Draw the hoops
     left_hoop_x = origin_shift_x - court_x / 2 + court.court_parameters["hoop_distance_from_edge"]
     right_hoop_x = origin_shift_x + court_x / 2 - court.court_parameters["hoop_distance_from_edge"]
@@ -767,7 +811,7 @@ def draw_court_3d(
 
     x, y = right_bb.get_data()
     ax3d.plot(x, y, zs=court.court_parameters["hoop_height"], zdir="z", color=hoop_color)
-    '''
+    """
     # For each line in the 2D plot, create a corresponding line in the 3D plot
     for line in ax2d.lines:
         x, y = line.get_data()
