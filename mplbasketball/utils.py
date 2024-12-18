@@ -11,7 +11,7 @@ def transform(
     fr: Literal["h", "hl", "hr", "v", "vu", "vd"],
     to: Literal["h", "hl", "hr", "v", "vu", "vd"],
     origin: Literal["center", "top-left", "bottom-left", "top-right", "bottom-right"],
-    court_type: Literal["nba", "wnba", "ncaa", "fiba"],
+    court_type: Literal["nba", "wnba", "ncaa", "fiba"] = "nba",
 ) -> tuple[np.ndarray, np.ndarray]:
     """
     Function to transform a set of x, y values to match orientations desired for plotting.
