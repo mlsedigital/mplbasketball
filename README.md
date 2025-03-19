@@ -249,7 +249,7 @@ ax.imshow(heatmap_2.T, extent=extent_2, origin='lower', cmap='cividis', zorder=-
 
 # Documentation
 
-Full documentation coming soon. In the meantime, check out the examples in this README, as well as some of our [examples](https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/examples/)!
+Full documentation coming soon. In the meantime, check out the examples in this README, as well as some of our [examples](https://github.com/mlsedigital/mplbasketball/tree/main/examples)!
 
 # Contribute
 
