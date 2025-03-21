@@ -82,6 +82,7 @@ class Court:
             "bottom-left",
             "top-right",
             "bottom-right",
+            "hoop"
         ], "Invalid origin. Choose from 'center', '(top/bottom)-(left/right)'"
         assert units in ["m", "ft"], "Invalid units. Currently only 'm' and 'ft' are supported"
 
@@ -119,6 +120,12 @@ class Court:
                     -self.court_parameters["court_dims"][1] / 2,
                 ]
             )
+        elif origin == "hoop":
+            self.origin = np.array([
+                (self.court_parameters['court_dims'][0] / 2) - 
+                 self.court_parameters['hoop_distance_from_edge'],
+                0.0
+            ])
 
     def draw(
         self,
