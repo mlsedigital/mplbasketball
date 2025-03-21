@@ -1,4 +1,4 @@
-def transform(x, y, fr, to, origin, court_dims=[94.0, 50.0]):
+def transform(x, y, fr, to, origin, court_parameters):
     """
     Function to transform a set of x, y values to match orientations desired for plotting.
 
@@ -28,13 +28,18 @@ def transform(x, y, fr, to, origin, court_dims=[94.0, 50.0]):
     if origin == "center":
         center_court = [0.0, 0.0]
     elif origin == "top-left":
-        center_court = [court_dims[0] / 2, -court_dims[1] / 2]
+        center_court = [court_parameters['court_dims'][0] / 2, -court_parameters['court_dims'][1] / 2]
     elif origin == "bottom-left":
-        center_court = [court_dims[0] / 2, court_dims[1] / 2]
+        center_court = [court_parameters['court_dims'][0] / 2, court_parameters['court_dims'][1] / 2]
     elif origin == "top-right":
-        center_court = [-court_dims[0] / 2, -court_dims[1] / 2]
+        center_court = [-court_parameters['court_dims'][0] / 2, -court_parameters['court_dims'][1] / 2]
     elif origin == "bottom-right":
-        center_court = [-court_dims[0] / 2, court_dims[1] / 2]
+        center_court = [-court_parameters['court_dims'][0] / 2, court_parameters['court_dims'][1] / 2]
+    elif origin == "hoop":
+        center_court = [
+            - (court_parameters['court_dims'][0] / 2) + court_parameters['hoop_distance_from_edge'],  
+            0.0  
+        ]
 
     if fr == to:
         return x, y
