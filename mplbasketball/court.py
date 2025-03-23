@@ -132,7 +132,7 @@ class Court:
 
     def draw(
         self,
-        ax: Axes = None,
+        ax: Axes | None = None,
         orientation: Literal["v", "h", "hl", "hr", "vu", "vd"] = "h",
         nrows=1,
         ncols=1,
