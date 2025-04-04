@@ -47,11 +47,12 @@ ax.scatter(x, y)
 
 Currently, you can use `mplbasketball` to
 
-1. Plot 2D and 3D spatio-temporal basketball data from 3 major basketball competitions
+1. Plot 2D and 3D spatio-temporal basketball data from 4 major basketball competitions
    1. [NBA](https://official.nba.com/rule-no-1-court-dimensions-equipment/)
    2. [WNBA](https://www.wnba.com/archive/wnba/analysis/rule_one.html)
    3. [NCAA](https://ncaaorg.s3.amazonaws.com/championships/sports/basketball/rules/common/PRXBB_CourtDiagram.pdf)
-2. View data in different orientations orientation (horizontal, vertical, and also normalized to left/right/up/down). The `utils.transform` function makes going between orientations extremely easy and seamless.
+   4. [FIBA](https://nz.basketball/wp-content/uploads/2020/02/FIBA-Basketball-Court-Dimensions.pdf)
+2. View data in different orientations orientation (horizontal, vertical, and also normalized to left/right/up/down). The [`utils.transform`](./mplbasketball/utils.py) function makes going between orientations extremely easy and seamless.
 3. Easily interface with existing `matplotlib` functions.
 
 # Before you begin
@@ -96,9 +97,13 @@ The package allows for the origin of the data to be in 5 locations on the court 
 
 The origin should be specified in the initial specification of the `Court` object. To see what the x and y ranges are for each origin choice, see [this document](https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/docs/origin_vs_coordinates.pdf). **These origin conventions assume the data is in the left-right direction.**
 
-## Transforming data to different orientations
+## Transforming Data to Different Orientations
 
-Often, it is more useful to view data from different perspectives. As mentioned in the preceding section, there are 6 orientations to view 2D spatiotemporal data in `mplbasketball`. The `utils.transform()` function makes it very easy to change perspective. We first load some data in its original form; say we are working with a dataset that uses the `"bottom-left"` part of the court as the origin.
+Often, it is more useful to view data from different perspectives. As mentioned in the preceding section, there are 6 orientations to view 2D spatiotemporal data in `mplbasketball`.
+
+Additionally, the `utils.transform()` function allows you to easily change perspectives while accounting for different court types. By selecting a `court_type` (e.g., `"nba"`, `"wnba"`, `"ncaa"`, or `"fiba"`), the function ensures that transformations are accurate for the specific dimensions and characteristics of the chosen court.
+
+We first load some data in its original form; say we are working with a dataset that uses the `"bottom-left"` part of the court as the origin.
 
 ```python
 import numpy as np
@@ -108,6 +113,7 @@ from mplbasketball.utils import transform
 
 # Initialize Court object
 origin = "bottom-left"
+court_type = "nba"
 court = Court(origin=origin)
 fig, ax = plt.subplots(1, 4)
 
@@ -129,8 +135,8 @@ Now, say we want to visualize the first (blue) dataset normalized to the left si
 In the second subplot, we can transform the data such that all of the points are normalized to their respective side.
 
 ```python
-x_1_hl, y_1_hl = transform(x_1, y_1, fr="h", to="hl", origin=origin)
-x_2_hr, y_2_hr = transform(x_2, y_2, fr="h", to="hr", origin=origin)
+x_1_hl, y_1_hl = transform(x_1, y_1, fr="h", to="hl", origin=origin, court_type=court_type)
+x_2_hr, y_2_hr = transform(x_2, y_2, fr="h", to="hr", origin=origin, court_type=court_type)
 court.draw(ax[1], )
 ax[1].scatter(x_1_hl, y_1_hl, s=5, c="tab:blue")
 ax[1].scatter(x_2_hr, y_2_hr, s=5, c="tab:orange")
@@ -139,11 +145,11 @@ ax[1].scatter(x_2_hr, y_2_hr, s=5, c="tab:orange")
 Here, the `fr` and `to` arguments tell the function what orientation the data currently is in, and what the desired orientation is, respectively. Finally, we can visualize this left-normalized data on a vertical court. Say we want to look at the blue data with the hoop at the bottom (the `"vd"` orientation), and the orange data with the hoop at the top. This is again very easy:
 
 ```python
-x_1_vd, y_1_vd = transform(x_1_hl, y_1_hl, fr="hl", to="vd", origin=origin)
+x_1_vd, y_1_vd = transform(x_1_hl, y_1_hl, fr="hl", to="vd", origin=origin, court_type=court_type)
 court.draw(ax[2], orientation="vd")
 ax[2].scatter(x_1_vd, y_1_vd, s=5, c="tab:blue")
 
-x_2_vu, y_2_vu = transform(x_2_hr, y_2_hr, fr="hl", to="vu", origin=origin)
+x_2_vu, y_2_vu = transform(x_2_hr, y_2_hr, fr="hl", to="vu", origin=origin, court_type=court_type)
 court.draw(ax[3], orientation="vu")
 ax[3].scatter(x_2_vu, y_2_vu, s=5, c="tab:orange")
 ```
@@ -159,7 +165,7 @@ Some notes about the above:
 1. To produce data for the final plot, we could have also used
 
 ```python
-x_1_vd, y_1_vd = transform(x_1, y_1, fr="h", to="vd", origin=origin)
+x_1_vd, y_1_vd = transform(x_1, y_1, fr="h", to="vd", origin=origin, court_type=court_type)
 ```
 
 2. To show more/less of the court markings, we can make use of the `zorder` argument in the `ax.scatter` plots.
@@ -209,8 +215,8 @@ x_2 = np.random.uniform(0, 94, size=n_pts)
 y_2 = np.random.uniform(0, 50, size=n_pts)
 
 # Transform the data
-x_1_hl, y_1_hl = transform(x_1, y_1, fr="h", to="hl", origin=origin)
-x_2_hr, y_2_hr = transform(x_2, y_2, fr="h", to="hr", origin=origin)
+x_1_hl, y_1_hl = transform(x_1, y_1, fr="h", to="hl", origin=origin,court_type="nba")
+x_2_hr, y_2_hr = transform(x_2, y_2, fr="h", to="hr", origin=origin, court_type="nba")
 
 # Draw the court, slightly thicken the lines
 court.draw(ax, line_color="white", line_width=0.3)
@@ -288,7 +294,7 @@ pytest --mpl-generate-path=baseline
 
 # Documentation
 
-Full documentation coming soon. In the meantime, check out the examples in this README, as well as some of our [examples](https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/examples/)!
+Full documentation coming soon. In the meantime, check out the examples in this README, as well as some of our [examples](https://github.com/mlsedigital/mplbasketball/tree/main/examples)!
 
 # Contribute
 
