@@ -7,6 +7,7 @@ Contributions are made to this repo via Issues and Pull Requests (PRs)
 - [Issues](#issues)
 - [Pull Requests](#pull-requests)
 - [Making Changes](#making-changes)
+- [Testing](#testing)
 - [Reviewing and Merging](#reviewing-and-merging)
 
 ## Issues
@@ -98,6 +99,44 @@ git push origin <your-branch-name>
 ```
 
 Open a pull request by visiting the [Pull Requests](https://github.com/mlsedigital/mplbasketball/pulls) page on GitHub.
+
+## Testing
+
+Before submitting your pull request, make sure to run the tests to ensure your changes don't break existing functionality.
+
+### Running Tests
+
+You can run the tests using pytest through Poetry:
+
+```bash
+# Run all tests
+poetry run pytest
+
+# Run tests with verbose output
+poetry run pytest -v
+```
+
+### Checking Code Coverage
+
+To check the code coverage of the tests, use the `pytest-cov` plugin:
+
+```bash
+# Run tests with coverage report
+poetry run pytest --cov=mplbasketball
+
+# Generate a detailed HTML coverage report
+poetry run pytest --cov=mplbasketball --cov-report=html
+```
+
+The HTML coverage report will be generated in the `htmlcov` directory. Open `htmlcov/index.html` in your browser to view the detailed coverage report.
+
+### Writing Tests
+
+When adding new features or fixing bugs, please include tests that cover your changes. Tests should be placed in the `tests/` directory and follow the existing naming conventions:
+
+- Test files should be named `test_*.py`
+- Test functions should be named `test_*`
+- Each test function should focus on testing a specific functionality
 
 ## Reviewing and Merging
 

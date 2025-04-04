@@ -253,45 +253,6 @@ ax.imshow(heatmap_2.T, extent=extent_2, origin='lower', cmap='cividis', zorder=-
   <img src="https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/figs/heatmap.png" width="75%">
 </p>
 
-# For Developers
-
-If you want to contribute to the development of `mplbasketball`, follow these steps:
-
-1. Clone the repository:
-```bash
-git clone https://github.com/mlsedigital/mplbasketball.git
-cd mplbasketball
-```
-
-2. Set up a development environment:
-```bash
-# Create a virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install development dependencies
-pip install -r requirements-dev.txt
-```
-
-The `requirements-dev.txt` file includes all the necessary dependencies for development:
-- `pytest` and `pytest-mpl` for testing
-- `pytest-cov` for code coverage analysis
-- `matplotlib` and `numpy` as core dependencies
-
-3. Run the tests:
-```bash
-# Run all tests
-pytest
-
-# Run tests with coverage report
-pytest --cov=mplbasketball
-
-# Generate baseline images for visual tests
-pytest --mpl-generate-path=baseline
-```
-
-4. Make your changes, add tests, and ensure all tests pass before submitting a pull request.
-
 # Documentation
 
 Full documentation coming soon. In the meantime, check out the examples in this README, as well as some of our [examples](https://github.com/mlsedigital/mplbasketball/tree/main/examples)!
