@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from mplbasketball.utils import *
+from mplbasketball.utils import transform
 
 def test_utils_functions():
     """Test basic utility functions"""
