@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mplbasketball"
-version = "1.0.0"
+version = "1.0.1"
 description = "A Python plotting library for visualization of basketball data."
 authors = ["Sreekar Voleti <sreekar.voleti@mlse.com>"]
 license = "MIT"
@@ -17,7 +17,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Topic :: Scientific/Engineering :: Visualization"
+    "Topic :: Scientific/Engineering :: Visualization",
 ]
 
 [tool.poetry.dependencies]
@@ -28,12 +28,11 @@ matplotlib = "^3.9.0"
 [tool.poetry.urls]
 "Issues" = "https://github.com/mlsedigital/mplbasketball/issues"
 
-[tool.poetry.dev-dependencies]
-pytest = "^8.3.0"
-pytest-mpl = "0.17.0"
 
 [tool.poetry.group.dev.dependencies]
+pytest = "^8.3.0"
 pytest-cov = "^6.1.0"
+pytest-mpl = "0.17.0"
 
 [build-system]
 requires = ["poetry-core>=1.9.0"]
