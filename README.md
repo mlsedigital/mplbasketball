@@ -4,6 +4,8 @@
 
 **A Python plotting library to visualize basketball data, created by the Sport Performance Lab (SPL) at Maple Leaf Sports & Entertainment (MLSE), Toronto, Canada.**
 
+[![PyPI version](https://badge.fury.io/py/mplbasketball.svg)](https://badge.fury.io/py/mplbasketball)
+
 [Sport Performance Lab (SPL)](https://www.mlsedigital.com/innovation-initiatives/sport-performance-lab) is a Research and Development group that works across all MLSE teams on strategic research initiatives in sports analytics and player performance.
 
 # Quick start
@@ -53,8 +55,8 @@ Currently, you can use `mplbasketball` to
    3. [NCAA](https://ncaaorg.s3.amazonaws.com/championships/sports/basketball/rules/common/PRXBB_CourtDiagram.pdf)
    4. [FIBA](https://nz.basketball/wp-content/uploads/2020/02/FIBA-Basketball-Court-Dimensions.pdf)
 2. View data in different orientations orientation (horizontal, vertical, and also normalized to left/right/up/down). The [`utils.transform`](./mplbasketball/utils.py) function makes going between orientations extremely easy and seamless.
-3. Draw lines with various effects (comet, transparent, colormap) using the `Lines` function
-4. Easily interface with existing `matplotlib` functions.
+3. Easily interface with existing `matplotlib` functions.
+4. Draw lines with various effects (comet, transparent, colormap) using the `Lines` function
 
 # Before you begin
 
