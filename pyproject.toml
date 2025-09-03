@@ -28,11 +28,9 @@ matplotlib = "^3.9.0"
 [tool.poetry.urls]
 "Issues" = "https://github.com/mlsedigital/mplbasketball/issues"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^8.3.0"
 pytest-mpl = "0.17.0"
-
-[tool.poetry.group.dev.dependencies]
 pytest-cov = "^6.1.0"
 
 [build-system]
