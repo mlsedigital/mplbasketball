@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional, Union
 
 import matplotlib.lines as lines
 import matplotlib.patches as patches
@@ -132,7 +132,7 @@ class Court:
 
     def draw(
         self,
-        ax: Axes | None = None,
+        ax: Optional[Axes] = None,
         orientation: Literal["v", "h", "hl", "hr", "vu", "vd"] = "h",
         nrows=1,
         ncols=1,
@@ -1311,10 +1311,10 @@ class Court:
     def _draw_rectangle(
         self,
         ax: Axes,
-        x0: float | int,
-        y0: float | int,
-        len_x: float | int,
-        len_y: float | int,
+        x0: Union[float, int],
+        y0: Union[float, int],
+        len_x: Union[float, int],
+        len_y: Union[float, int],
         line_width,
         line_color,
         line_style,
@@ -1344,10 +1344,10 @@ class Court:
     def _draw_line(
         self,
         ax: Axes,
-        x0: float | int,
-        y0: float | int,
-        dx: float | int,
-        dy: float | int,
+        x0: Union[float, int],
+        y0: Union[float, int],
+        dx: Union[float, int],
+        dy: Union[float, int],
         line_width,
         line_color,
         line_style,
@@ -1366,8 +1366,8 @@ class Court:
     def _draw_circle(
         self,
         ax: Axes,
-        x0: float | int,
-        y0: float | int,
+        x0: Union[float, int],
+        y0: Union[float, int],
         diameter,
         line_width,
         line_color,
@@ -1397,8 +1397,8 @@ class Court:
     def _draw_circular_arc(
         self,
         ax: Axes,
-        x0: float | int,
-        y0: float | int,
+        x0: Union[float, int],
+        y0: Union[float, int],
         diameter,
         angle: float,
         theta1: float,

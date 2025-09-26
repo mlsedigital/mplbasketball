@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Union, Optional, Tuple
 
 import matplotlib as mpl
 import matplotlib.lines as lines
@@ -10,7 +10,7 @@ from matplotlib.figure import Figure
 
 from mplbasketball.court_params import _get_court_params_in_desired_units
 
-Color = tuple[float, float, float] | str
+Color = Union[Tuple[float, float, float], str]
 
 
 class Court3D:
@@ -59,7 +59,7 @@ class Court3D:
         line_width: float = None,
         hoop_alpha=1.0,
         pad=5.0,
-    ) -> tuple[Figure, Axes] | Figure:
+    ) -> Union[Tuple[Figure, Axes], Figure]:
         """
         Draws the basketball court according to specified parameters.
 
@@ -535,10 +535,10 @@ class Court3D:
     def _draw_rectangle(
         self,
         ax: Axes,
-        x0: float | int,
-        y0: float | int,
-        len_x: float | int,
-        len_y: float | int,
+        x0: Union[float, int],
+        y0: Union[float, int],
+        len_x: Union[float, int],
+        len_y: Union[float, int],
         line_width,
         line_color,
         line_style,
@@ -560,10 +560,10 @@ class Court3D:
     def _draw_line(
         self,
         ax: Axes,
-        x0: float | int,
-        y0: float | int,
-        dx: float | int,
-        dy: float | int,
+        x0: Union[float, int],
+        y0: Union[float, int],
+        dx: Union[float, int],
+        dy: Union[float, int],
         line_width,
         line_color,
         line_style,
@@ -582,10 +582,10 @@ class Court3D:
     def _draw_circle(
         self,
         ax: Axes,
-        x0: float | int,
-        y0: float | int,
-        diameter: float | int,
-        line_width: float | int,
+        x0: Union[float, int],
+        y0: Union[float, int],
+        diameter: Union[float, int],
+        line_width: Union[float, int],
         line_color: Color,
         line_style,
         face_color,
@@ -605,13 +605,13 @@ class Court3D:
     def _draw_circular_arc(
         self,
         ax: Axes,
-        x0: float | int,
-        y0: float | int,
-        diameter: float | int,
-        angle: float | int,
-        theta1: float | int,
-        theta2: float | int,
-        line_width: float | int,
+        x0: Union[float, int],
+        y0: Union[float, int],
+        diameter: Union[float, int],
+        angle: Union[float, int],
+        theta1: Union[float, int],
+        theta2: Union[float, int],
+        line_width: Union[float, int],
         line_color: Color,
         line_style,
         alpha,
@@ -689,7 +689,7 @@ def draw_court_3d(
     # a duplicate of the first point) rectangle with given height and width
     # where it is symmetric about the x-axis, and situated above the
     # xy plane
-    def vrectangle_pts(w: float | int, h: float | int):
+    def vrectangle_pts(w: Union[float, int], h: Union[float, int]):
         return np.array(
             [
                 [origin_shift_x, origin_shift_y - w / 2, 0.0],
@@ -701,7 +701,7 @@ def draw_court_3d(
         ).T
 
     # hcircle_pts generates points to create a horizontal circle
-    def hcircle_pts(radius: float | int, n: int):
+    def hcircle_pts(radius: Union[float, int], n: int):
         assert isinstance(n, int) and n >= 0, "n must be a non-negative integer"
 
         return np.array(
