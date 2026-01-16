@@ -4,6 +4,8 @@
 
 **A Python plotting library to visualize basketball data, created by the Sport Performance Lab (SPL) at Maple Leaf Sports & Entertainment (MLSE), Toronto, Canada.**
 
+[![PyPI version](https://badge.fury.io/py/mplbasketball.svg)](https://badge.fury.io/py/mplbasketball)
+
 [Sport Performance Lab (SPL)](https://www.mlsedigital.com/innovation-initiatives/sport-performance-lab) is a Research and Development group that works across all MLSE teams on strategic research initiatives in sports analytics and player performance.
 
 # Quick start
@@ -54,6 +56,7 @@ Currently, you can use `mplbasketball` to
    4. [FIBA](https://nz.basketball/wp-content/uploads/2020/02/FIBA-Basketball-Court-Dimensions.pdf)
 2. View data in different orientations orientation (horizontal, vertical, and also normalized to left/right/up/down). The [`utils.transform`](./mplbasketball/utils.py) function makes going between orientations extremely easy and seamless.
 3. Easily interface with existing `matplotlib` functions.
+4. Draw lines with various effects (comet, transparent, colormap) using the `Lines` function
 
 # Before you begin
 
@@ -251,6 +254,29 @@ ax.imshow(heatmap_2.T, extent=extent_2, origin='lower', cmap='cividis', zorder=-
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/figs/heatmap.png" width="75%">
+</p>
+
+## The Lines function
+
+The `Lines` function provides a way to draw lines on basketball courts with various visual effects. It's particularly useful for visualizing passes, player movements, and other line-based data.
+
+### Basic usage
+
+```python
+from mplbasketball import Court, Lines
+
+court = Court(court_type="nba", origin="center")
+fig, ax = court.draw(orientation="h")
+
+# Draw a simple line
+Lines(0, 0, 20, 20, color="red", linewidth=3, ax=ax)
+
+# Draw multiple lines
+Lines([-20, 20], [10, -10], [20, -20], [-10, 10], 
+      color=["red", "blue"], linewidth=3, ax=ax)
+```
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mlsedigital/mplbasketball/main/figs/completed_passes.png" width="100%">
 </p>
 
 # Documentation
