@@ -34,7 +34,12 @@ class Court3D:
     - AssertionError: If the provided court_type is not 'nba', 'wnba', 'ncaa' or 'fiba'.
     """
 
-    def __init__(self, court_type="nba", origin=np.array([0.0, 0.0]), units="ft"):
+    def __init__(
+        self,
+        court_type: Literal["nba", "wnba", "ncaa", "fiba"] = "nba",
+        origin=np.array([0.0, 0.0]),
+        units: Literal["m", "ft"] = "ft",
+    ):
         assert court_type in [
             "nba",
             "wnba",
@@ -56,7 +61,7 @@ class Court3D:
         paint_color="none",
         line_color="black",
         line_alpha=1.0,
-        line_width: float = None,
+        line_width: float | None = None,
         hoop_alpha=1.0,
         pad=5.0,
     ) -> Union[Tuple[Figure, Axes], Figure]:
